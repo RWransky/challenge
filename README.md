@@ -4,7 +4,20 @@ Typescript & React implementation of the popular arcade game Pacman.
 
 Currently pacman uses [A, S, W, D] keys for moving.
 
-**Suggested time:** 1 hour.
+# Setup and Running •̮ ̮•
+This webapp uses `Docker` to create a standard development image and `docker-compose` to run the image in a container.
+
+## Build
+
+- `docker-compose build`
+
+## Run
+
+- Starting the client server: `docker-compose up -d`
+- Attaching to log output: `docker-compose logs -f`
+- If the development server starts successfully go to `localhost:3000` to view the webapp.
+
+# Instructions
 
 ## Tasks
 
