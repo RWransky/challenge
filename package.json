@@ -23,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "compose-start": "react-scripts build && react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

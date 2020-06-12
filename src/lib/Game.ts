@@ -1,4 +1,4 @@
-import { GameBoardItemType, GameBoardPieceType, GameMode, GhostColor } from './Map';
+import { GameBoardItemType, GameBoardPieceType, GameMode, GameDirection, GhostColor } from './Map';
 import Ghost from './game/Ghost';
 import Pacman from './game/Pacman';
 
@@ -105,6 +105,7 @@ const InitializeGame = (): GameState => {
   const GhostStore = [];
   let colorIdx = 0;
   const turn = 0;
+  const autoRun: boolean = false;
   const mode: GameMode = GameMode.PLAYING;
   const pillTimer:GameBoardItemTimer = { timer: 0 };
   const PacmanStore: Pacman = new Pacman({id: 'DUMMY', x: 0, y: 0, type: GameBoardPieceType.EMPTY, moves: {}}, items, pillTimer);
@@ -135,7 +136,8 @@ const InitializeGame = (): GameState => {
           item = { type: GameBoardItemType.PILL };
           break;
         case gameMap.PACMAN:
-          PacmanStore.setPiece(piece);
+          PacmanStore.setPiece(piece,GameDirection.RIGHT);
+          PacmanStore.initTracks(piece);
           item = PacmanStore;
           break;    
         case gameMap.GHOST:
@@ -157,7 +159,7 @@ const InitializeGame = (): GameState => {
 
   layout = ProcessLayout(layout);
 
-  return { mode, turn, GhostStartPoints, layout, items, GhostStore, PacmanStore, pillTimer };
+  return { mode, turn, autoRun, GhostStartPoints, layout, items, GhostStore, PacmanStore, pillTimer };
 };
 
 export { InitializeGame };

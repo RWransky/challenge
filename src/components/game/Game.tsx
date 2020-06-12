@@ -14,6 +14,7 @@ interface GameProps {
   mode?: GameMode,
   runningScore?: number,
   iteration?: number,
+  autoRun?: boolean
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -22,13 +23,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Game: React.FC<GameProps> = ({ dispatch, layout, score, runningScore, iteration }): JSX.Element => {
+const Game: React.FC<GameProps> = ({ dispatch, layout, score, runningScore, iteration, autoRun }): JSX.Element => {
   
   const styles = useStyles({});
 
   useEffect(() => {
-    setInterval(() => {dispatch(tic());}, 250);
-  }, [dispatch]);
+    setInterval(() => {dispatch(tic());}, autoRun ? 100 : 250);
+  }, [dispatch, autoRun]);
   
   return (
     <Grid container alignContent="center" justify="center" className={styles.base} spacing={3}>
@@ -36,7 +37,7 @@ const Game: React.FC<GameProps> = ({ dispatch, layout, score, runningScore, iter
         <GameBoard boardState={layout} />
       </Grid>
       <Grid item>
-        <Controls score={score} runningScore={runningScore} iteration={iteration} />
+        <Controls score={score} runningScore={runningScore} iteration={iteration} autoRun={autoRun}/>
       </Grid>
     </Grid>
   );
@@ -44,11 +45,11 @@ const Game: React.FC<GameProps> = ({ dispatch, layout, score, runningScore, iter
 
 const mapStateToProps = (state: ReduxState): object => {
  
-  const { layout, PacmanStore, runningScore, iteration } = state.game;
+  const { layout, PacmanStore, runningScore, iteration, autoRun } = state.game;
 
   const score = typeof PacmanStore !== 'undefined' ? PacmanStore.score : 0;
 
-  return { layout, score, runningScore, iteration };
+  return { layout, score, runningScore, iteration, autoRun };
 };
 
 export default connect(mapStateToProps)(Game);

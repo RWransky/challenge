@@ -11,6 +11,10 @@ services:
       - type: bind
         source: ./src
         target: /app/src
+      - type: bind
+        source: ./package.json
+        target: /app/package.json
     ports:
       - 3000:3000
     stdin_open: true
+    command: "npm run-script compose-start"

@@ -78,7 +78,6 @@ class Item implements GameBoardItem {
   findItem(directionKey: string, typeToFind: GameBoardItemType):GameBoardItem | false {
 
     let currentPiece = this.piece.moves[directionKey];
-
     // While there is no wall in the current view, transverse forward looking for the item
     while (typeof currentPiece !== 'undefined' && currentPiece.type !== GameBoardPieceType.WALL) {
       const item = this.items[currentPiece.y][currentPiece.x];

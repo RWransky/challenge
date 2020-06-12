@@ -25,6 +25,31 @@ const GameDirectionToKeys = (direction: GameDirection): string => {
   }
 };
 
+export const KeysToGameDirection = (key: string): GameDirection => {
+  switch (key) {
+    case 'up': return GameDirection.UP;
+    case 'down': return GameDirection.DOWN;
+    case 'left': return GameDirection.LEFT;
+    case 'right': return GameDirection.RIGHT;
+    default: return GameDirection.NONE;
+  }
+}
+
+export const ReverseGameDirection = (direction: GameDirection | string): string => {
+
+  switch (direction) {
+    case GameDirection.DOWN: return 'up';
+    case GameDirection.UP: return 'down';
+    case GameDirection.RIGHT: return 'left';
+    case GameDirection.LEFT: return 'right';
+    case 'down': return 'up';
+    case 'up': return 'down';
+    case 'left': return 'right';
+    case 'right': return 'left';
+    default: return 'none';
+  }
+};
+
 export { GameDirectionToKeys };
 
 export const GameDirectionMap:GameDirectionMap = {
